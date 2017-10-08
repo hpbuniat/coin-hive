@@ -57,6 +57,7 @@ Options:
   --threads         Number of threads for the miner
   --proxy           Proxy socket 5/4, for example: socks5://127.0.0.1:9050
   --puppeteer-url   URL where puppeteer will point to, by default is miner server (host:port)
+  --chrome-path     Path where puppeteer will find chrome, if not using the bundled one
   --miner-url       URL of CoinHive's JavaScript miner, can be set to use a proxy
   --pool-host       A custom stratum pool host, it must be used in combination with --pool-port
   --pool-port       A custom stratum pool port, it must be used in combination with --pool-host
@@ -137,6 +138,8 @@ All the following environment variables can be used to configure the miner from 
 - `COINHIVE_HOST`: The host that will be used to launch the server, and where puppeteer will point to
 
 - `COINHIVE_PUPPETEER_URL`: In case you don't want to point puppeteer to the local server, you can use this to make it point somewhere else where the miner is served (ie: `COINHIVE_PUPPETEER_URL=http://coin-hive.herokuapp.com`)
+
+- `COINHIVE_CHROME_PATH`: In case you want puppeteer to use a custom chrome.
 
 - `COINHIVE_MINER_URL`: Set the CoinHive JavaScript Miner url. By defualt this is `https://coinhive.com/lib/coinhive.min.js`. You can set this to use a [CoinHive Proxy](https://github.com/cazala/coin-hive-proxy).
 

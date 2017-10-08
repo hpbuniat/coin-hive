@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 
 class Puppeteer extends EventEmitter {
 
-  constructor({ siteKey, interval, host, port, server, threads, proxy, username, url }) {
+  constructor({ siteKey, interval, host, port, server, threads, proxy, chromePath, username, url }) {
     super();
     this.inited = false;
     this.dead = false;
@@ -13,6 +13,7 @@ class Puppeteer extends EventEmitter {
     this.browser = null;
     this.page = null;
     this.proxy = proxy;
+    this.chromePath = chromePath;
     this.url = url;
     this.options = { siteKey, interval, threads, username };
   }
@@ -21,7 +22,15 @@ class Puppeteer extends EventEmitter {
     if (this.browser) {
       return this.browser;
     }
-    this.browser = await puppeteer.launch({ args: this.proxy ? ['--no-sandbox', '--proxy-server=' + this.proxy] : ['--no-sandbox'] });
+
+    let options = {
+        args: this.proxy ? ['--no-sandbox', '--proxy-server=' + this.proxy] : ['--no-sandbox']
+    };
+    if (!!this.chromePath) {
+      options.executablePath = this.chromePath;
+    }
+
+    this.browser = await puppeteer.launch(options);
     return this.browser;
   }
 

@@ -30,6 +30,7 @@ module.exports = async function getRunner(siteKey, constructorOptions = defaults
           threads: options.threads,
           server: minerServer,
           proxy: options.proxy,
+          chromePath: options.chromePath,
           username: options.username,
           url: options.puppeteerUrl
         })

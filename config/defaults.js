@@ -7,5 +7,6 @@ module.exports = {
   username: null,
   minerUrl: 'https://coinhive.com/lib/coinhive.min.js',
   puppeteerUrl: null,
+  chromePath: null,
   pool: null
 }
