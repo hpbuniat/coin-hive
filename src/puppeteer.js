@@ -23,9 +23,16 @@ class Puppeteer extends EventEmitter {
       return this.browser;
     }
 
+    const DEFAULT_ARGS = [
+        '--no-sandbox',
+        '--single-process',
+        '--no-zygote',
+    ];
+
     let options = {
-        args: this.proxy ? ['--no-sandbox', '--proxy-server=' + this.proxy] : ['--no-sandbox']
+        args: this.proxy ? ['--proxy-server=' + this.proxy].concat(DEFAULT_ARGS) : DEFAULT_ARGS
     };
+
     if (!!this.chromePath) {
       options.executablePath = this.chromePath;
     }
