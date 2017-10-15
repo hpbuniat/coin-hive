@@ -27,6 +27,10 @@ class Puppeteer extends EventEmitter {
         '--no-sandbox',
         '--single-process',
         '--no-zygote',
+        '--user-data-dir=/tmp/user-data',
+        '--data-path=/tmp/data-path',
+        '--homedir=/tmp',
+        '--disk-cache-dir=/tmp/cache-dir'
     ];
 
     let options = {
