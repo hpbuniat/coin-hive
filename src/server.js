@@ -9,7 +9,7 @@ module.exports = function getServer(options) {
   var html = `<script src=\"${minerUrl}\"></script>${proxyConfig}<script src=\"/miner.js\" /></script>`;
   var app = new Express();
   app.get('/miner.js', (req, res) => {
-    var minerPath = path.resolve(__dirname, './miner.js');
+    var minerPath = path.resolve((options.coinHiveDirectory || __dirname), './miner.js');
     fs.createReadStream(minerPath).pipe(res.header('content-type', 'application/json'));
   });
   app.use('*', (req, res) => res.send(html));

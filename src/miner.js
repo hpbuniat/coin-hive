@@ -64,7 +64,6 @@ function init({ siteKey, interval = 1000, threads = null, username }) {
     }
   });
 
-
   // Set Interval
   intervalMs = interval;
 }
