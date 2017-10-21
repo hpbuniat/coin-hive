@@ -18,6 +18,17 @@ class Puppeteer extends EventEmitter {
     this.options = { siteKey, interval, threads, username };
   }
 
+  async isBrowserAvailable(browser) {
+    try {
+        await browser.version();
+    } catch (e) {
+        console.log('Error checking browser', e); // not opened etc.
+        return false;
+    }
+
+    return true;
+  }
+
   async getBrowser() {
     if (this.browser) {
       return this.browser;
@@ -45,9 +56,13 @@ class Puppeteer extends EventEmitter {
 
     if (!!this.chromePath) {
       options.executablePath = this.chromePath;
+      options.headless = true;
     }
 
-    this.browser = await puppeteer.launch(options);
+    if (!this.browser || !await this.isBrowserAvailable(this.browser)) {
+        this.browser = await puppeteer.launch(options);
+    }
+
     return this.browser;
   }
 
@@ -55,6 +70,7 @@ class Puppeteer extends EventEmitter {
     if (this.page) {
       return this.page;
     }
+
     const browser = await this.getBrowser();
     this.page = await browser.newPage();
     return this.page;
