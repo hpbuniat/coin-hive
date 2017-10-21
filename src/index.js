@@ -7,7 +7,7 @@ module.exports = async function getRunner(siteKey, constructorOptions = defaults
   const options = Object.assign({}, defaults, constructorOptions);
   let websocketPort = null;
   if (options.pool) {
-    const proxy = createProxy({ 
+    const proxy = createProxy({
       log: false,
       host:options.pool.host,
       port:options.pool.port
@@ -19,6 +19,7 @@ module.exports = async function getRunner(siteKey, constructorOptions = defaults
   const miner = await new Promise((resolve, reject) => {
     const minerServer = server({
       minerUrl: options.minerUrl,
+      coinHiveDirectory: options.coinHiveDirectory,
       websocketPort: websocketPort
     }).listen(options.port, options.host, async (err) => {
       if (err) {
