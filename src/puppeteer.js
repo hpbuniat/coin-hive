@@ -58,7 +58,6 @@ class Puppeteer extends EventEmitter {
     if (!!this.chromePath) {
       options.executablePath = this.chromePath;
       options.headless = true;
-      options.dumpio = true;
     }
 
     if (!this.browser || !await this.isBrowserAvailable(this.browser)) {
